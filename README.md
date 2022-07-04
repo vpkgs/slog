@@ -97,6 +97,77 @@ trace(@FILE, 'trace')
 
 See [`DefaultLogger` implementation](/default_logger.v).
 
+```v
+// It's easy to do WebSocket, http or ... anything in same way.
+import slog {Level, BaseLogger}
+import time
+
+fn main() {
+	logger := init_logger(level: .trace)
+	go logger.collect()
+
+	slog.info('it works!!')
+}
+
+type Msg = Item | Cmd
+enum Cmd {
+	close
+}
+struct Item {
+	level Level
+	target string
+	msg string
+	time time.Time
+}
+pub struct CustomLoggger {
+	BaseLogger
+	msg_ch chan Msg
+}
+
+[params]
+pub struct CustomLogggerOpt {
+pub:
+	level Level = Level.info
+}
+pub fn init_logger(opt CustomLogggerOpt) &CustomLoggger {
+	mut log := &CustomLoggger {
+		msg_ch: chan Msg {cap: 20}
+	}
+	slog.set_logger(log)
+	slog.set_max_level(opt.level)
+	return log
+}
+
+pub fn (lg &CustomLoggger) log(lv Level, target string, msg string) {
+	timestamp := time.now()
+	lg.msg_ch <- Item {
+		level: lv
+		target: target
+		msg: msg
+		time: timestamp
+	}
+}
+
+pub fn (lg &CustomLoggger) close() {
+	lg.msg_ch <- Cmd.close
+}
+
+pub fn (lg &CustomLoggger) collect() {
+	for {
+		msg := <- lg.msg_ch
+		match msg {
+			Item {
+				println(msg)
+			}
+			Cmd {
+				lg.close()
+				break
+			}
+		}
+	}
+}
+```
+
 ## Motivation
 V's `log` have to be mutable when log things.
 It's quite difficult to use I thought.
