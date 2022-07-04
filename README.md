@@ -169,10 +169,10 @@ pub fn (lg &CustomLoggger) collect() {
 ```
 
 ## Motivation
-V's `log` have to be mutable when log things.
-It was difficult to use for me.
+V's `log` has big restriction.
+it have to be mutable when log things.
 
-I like `tracing` in Rust, so I used that as main reference.
+Rust's `tracing` is very easy to use, so I used `tracing` as main reference.
 
 ## Contribution
 ### Feature Request
