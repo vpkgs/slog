@@ -17,11 +17,11 @@ fn main() {
 	ofilename := os.real_path(os.join_path(os.dir(@FILE), 'logfile'))
 	slog.init_with_default_logger(ofilename, level: .info)
 
-	slog.err('Warning here')
-	slog.warn('Warning here')
-	slog.info('Warning here')
-	slog.debug('Warning here') // no output as `level` is `.info`
-	slog.trace('Warning here') // no output as `level` is `.info`
+	slog.err(@MOD, 'Warning here')
+	slog.warn(@MOD, 'Warning here')
+	slog.info(@MOD, 'Warning here')
+	slog.debug(@MOD, 'Warning here') // no output as `level` is `.info`
+	slog.trace(@MOD, 'Warning here') // no output as `level` is `.info`
 }
 ```
 

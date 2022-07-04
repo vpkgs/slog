@@ -1,21 +1,21 @@
 module slog
 
-pub fn err(msg string) {
-	log(.error, empty_str, msg)
+pub fn err(target string, msg string) {
+	log(.error, target, msg)
 }
 
-pub fn warn(msg string) {
-	log(.warn, empty_str, msg)
+pub fn warn(target string, msg string) {
+	log(.warn, target, msg)
 }
 
-pub fn info(msg string) {
-	log(.info, empty_str, msg)
+pub fn info(target string, msg string) {
+	log(.info, target, msg)
 }
 
-pub fn debug(msg string) {
-	log(.debug, empty_str, msg)
+pub fn debug(target string, msg string) {
+	log(.debug, target, msg)
 }
 
-pub fn trace(msg string) {
-	log(.trace, empty_str, msg)
+pub fn trace(target string, msg string) {
+	log(.trace, target, msg)
 }
