@@ -5,8 +5,9 @@ import term
 const (
 	empty_str = ''
 )
+
 pub const (
-	__logger = Logger(voidptr(0))
+	__logger  = Logger(voidptr(0))
 	max_level = Level.disabled
 )
 
@@ -20,25 +21,31 @@ pub enum Level {
 }
 
 pub fn set_max_level(level Level) {
-	unsafe { max_level = level }
+	unsafe {
+		max_level = level
+	}
 	$if dbg_logger ? {
 		dump(max_level)
 	}
 }
+
 [inline]
 pub fn get_logger() Logger {
 	return __logger
 }
+
 [inline]
 pub fn set_logger(log &Logger) {
-	mut log_mut := unsafe{ &__logger }
+	mut log_mut := unsafe { &__logger }
 	unsafe {
 		*log_mut = log
 	}
 }
+
 pub fn log_enabled(target string, lv Level) bool {
 	return true
 }
+
 pub fn log(lv Level, target string, msg string) {
 	if int(lv) <= int(max_level) {
 		// if logger_ := get_logger() {
