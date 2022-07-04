@@ -170,7 +170,7 @@ pub fn (lg &CustomLoggger) collect() {
 
 ## Motivation
 V's `log` have to be mutable when log things.
-It's quite difficult to use I thought.
+It was difficult to use for me.
 
 I like `tracing` in Rust, so I used that as main reference.
 
