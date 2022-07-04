@@ -2,6 +2,6 @@ Module {
 	name: 'tracing'
 	description: ''
 	version: ''
-	license: ''
+	license: 'MIT-0'
 	dependencies: []
 }
