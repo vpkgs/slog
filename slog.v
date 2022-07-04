@@ -1,8 +1,6 @@
 module slog
 
-import time
 import term
-import os
 
 const (
 	empty_str = ''
@@ -30,6 +28,13 @@ pub fn set_max_level(level Level) {
 [inline]
 pub fn get_logger() Logger {
 	return __logger
+}
+[inline]
+pub fn set_logger(log &Logger) {
+	mut log_mut := unsafe{ &__logger }
+	unsafe {
+		*log_mut = log
+	}
 }
 pub fn log_enabled(target string, lv Level) bool {
 	return true

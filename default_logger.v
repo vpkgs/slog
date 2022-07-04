@@ -1,5 +1,8 @@
 module slog
 
+import os
+import time
+
 pub struct DefaultLoggger {
 	BaseLogger
 	ofname_prefix string
@@ -23,10 +26,7 @@ pub fn init_with_default_logger(ofname string, opt DefaultLogggerOpt) {
 		ofname: name,
 		ofile: ofile,
 	}
-	mut log_mut := unsafe{ &__logger }
-	unsafe {
-		*log_mut = log
-	}
+	set_logger(log)
 	set_max_level(opt.level)
 }
 
