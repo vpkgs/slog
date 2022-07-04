@@ -1,5 +1,5 @@
 Module {
-	name: 'tracing'
+	name: 'slog'
 	description: ''
 	version: ''
 	license: 'MIT-0'

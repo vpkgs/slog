@@ -1,4 +1,4 @@
-module tracing
+module slog
 
 import time
 import term

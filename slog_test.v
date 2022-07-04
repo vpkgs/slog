@@ -1,4 +1,4 @@
-module tracing
+module slog
 
 fn test_dev() {
 	dump(max_level)

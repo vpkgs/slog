@@ -1,4 +1,4 @@
-A Logging library for Vlang, can use Easily.
+A Simple Logging library for Vlang, can use easily.
 
 - [Usage](#usage)
 - [Motivation](#motivation)
@@ -9,28 +9,28 @@ A Logging library for Vlang, can use Easily.
 ## Usage
 
 ```v
-import tracing
+import slog
 import os
 
 fn err(msg string) {
-	tracing.log(.error, @MOD, msg)
+	slog.log(.error, @MOD, msg)
 }
 fn warn(msg string) {
-	tracing.log(.warn, @MOD, msg)
+	slog.log(.warn, @MOD, msg)
 }
 fn info(msg string) {
-	tracing.log(.info, @MOD, msg)
+	slog.log(.info, @MOD, msg)
 }
 fn debug(msg string) {
-	tracing.log(.debug, @MOD, msg)
+	slog.log(.debug, @MOD, msg)
 }
 fn trace(msg string) {
-	tracing.log(.trace, @MOD, msg)
+	slog.log(.trace, @MOD, msg)
 }
 
 fn main() {
 	ofilename := os.real_path(os.join_path(os.dir(@FILE), 'logfile'))
-	tracing.init_with_default_logger(ofilename, level: .info)
+	slog.init_with_default_logger(ofilename, level: .info)
 
 	err('Warning here')
 	warn('Warning here')
@@ -44,27 +44,27 @@ or
 
 ```v
 // in your module
-import tracing
+import slog
 
 fn err(tag string, msg string) {
-	tracing.log(.error, tag, msg)
+	slog.log(.error, tag, msg)
 }
 fn warn(tag string, msg string) {
-	tracing.log(.warn, tag, msg)
+	slog.log(.warn, tag, msg)
 }
 fn info(tag string, msg string) {
-	tracing.log(.info, tag, msg)
+	slog.log(.info, tag, msg)
 }
 fn debug(tag string, msg string) {
-	tracing.log(.debug, tag, msg)
+	slog.log(.debug, tag, msg)
 }
 fn trace(tag string, msg string) {
-	tracing.log(.trace, tag, msg)
+	slog.log(.trace, tag, msg)
 }
 
 // then use
 fname := os.real_path(os.join_path(os.dir(@FILE), 'logfile'))
-tracing.init_with_default_logger(fname, level: .trace) // should be called only once
+slog.init_with_default_logger(fname, level: .trace) // should be called only once
 //
 error(@FILE, 'error')
 warn(@FILE, 'warn')
