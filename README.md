@@ -13,6 +13,24 @@
 import slog
 import os
 
+fn main() {
+	ofilename := os.real_path(os.join_path(os.dir(@FILE), 'logfile'))
+	slog.init_with_default_logger(ofilename, level: .info)
+
+	slog.err('Warning here')
+	slog.warn('Warning here')
+	slog.info('Warning here')
+	slog.debug('Warning here') // no output as `level` is `.info`
+	slog.trace('Warning here') // no output as `level` is `.info`
+}
+```
+
+If you need module info in log output
+
+```v
+import slog
+import os
+
 // Really want to generate following template by macro as `@MOD` value changes, or ...
 fn err(msg string) {
 	slog.log(.error, @MOD, msg)
