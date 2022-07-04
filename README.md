@@ -1,4 +1,4 @@
-A Simple Logging library for Vlang, can use easily.
+# A Simple Logging library for V
 
 - [Usage](#usage)
 - [Motivation](#motivation)
@@ -8,10 +8,12 @@ A Simple Logging library for Vlang, can use easily.
 
 ## Usage
 
+### Simple
 ```v
 import slog
 import os
 
+// Really want to generate following template by macro as `@MOD` value changes, or ...
 fn err(msg string) {
 	slog.log(.error, @MOD, msg)
 }
@@ -72,6 +74,10 @@ info(@FILE, 'info')
 debug(@FILE, 'debug')
 trace(@FILE, 'trace')
 ```
+
+### Custom Logger
+
+See [`DefaultLogger` implementation](/default_logger.v).
 
 ## Motivation
 V's `log` have to be mutable when log things.
