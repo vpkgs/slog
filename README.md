@@ -1,10 +1,16 @@
 # A Simple Logging library for V
 
+- [Install](#install)
 - [Usage](#usage)
 - [Motivation](#motivation)
 - [Contribution](#contribution)
   - [Feature Request](#feature-request)
   - [Bugfix](#bugfix)
+
+## Install
+```sh
+v install --git https://github.com/vpkgs/slog.git
+```
 
 ## Usage
 
