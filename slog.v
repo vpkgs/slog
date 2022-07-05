@@ -20,13 +20,24 @@ pub enum Level {
 	debug
 	trace
 }
+
 fn level___from_str(lv_str string) Level {
 	match lv_str {
-		'error' { return .error }
-		'warn' { return .warn }
-		'info' { return .info }
-		'debug' { return .debug }
-		'trace' { return .trace }
+		'error' {
+			return .error
+		}
+		'warn' {
+			return .warn
+		}
+		'info' {
+			return .info
+		}
+		'debug' {
+			return .debug
+		}
+		'trace' {
+			return .trace
+		}
 		else {
 			$if !prod {
 				dump('invalid level: $lv_str')
@@ -70,8 +81,8 @@ pub fn log(lv Level, target string, msg string) {
 	}
 
 	logger_ := get_logger()
-	// if logger_.enabled(target, lv) { // FIXME: This result in segfault... 
-		logger_.log(lv, target, msg)
+	// if logger_.enabled(target, lv) { // FIXME: This result in segfault...
+	logger_.log(lv, target, msg)
 	// }
 }
 

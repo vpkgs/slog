@@ -41,7 +41,6 @@ pub struct TargetedVLogger {
 	target string [required]
 }
 
-
 // ```v
 // vlogger := slog.get_v_logger('net.websocket')
 // websocket.new_client(url, logger: &vlogger)
