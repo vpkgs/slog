@@ -19,4 +19,14 @@ fn test_dev() {
 	log(.info, @MOD, 'it works!!')
 	log(.debug, @MOD, 'Should not be there')
 	log(.info, @MOD, 'it works2!!')
+
+	vlogger := get_v_logger('net.websocket')
+	vlogger.warn('Oops!')
+	vlogger.info('info!')
+	vlogger.fatal('fatal!')
+
+	logger := get_targeted_logger('net.websocket')
+	logger.warn('Oops!')
+	logger.info('info! NOT IN OUTPUT (> .warn)')
+	logger.trace('trace! NOT IN OUTPUT (> .warn)')
 }
