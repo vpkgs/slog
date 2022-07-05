@@ -38,7 +38,7 @@ fn (lg DefaultLoggger) log_file(lv Level, target string, msg string) {
 	mut l := unsafe { lg }
 
 	timestamp := time.now().format_ss_micro()
-	level := l.fmt_level_for_file(lv)
+	level := l.fmt_level(lv)
 	l.ofile.writeln('$timestamp [$level] $target: $msg') or {
 		eprintln('failed to write following msg to file: $timestamp [$level] $target: $msg')
 		panic(err)
@@ -48,6 +48,6 @@ fn (lg DefaultLoggger) log_file(lv Level, target string, msg string) {
 
 fn (lg &DefaultLoggger) log_console(lv Level, target string, msg string) {
 	timestamp := time.now().format_ss_micro()
-	level := lg.fmt_level(lv)
+	level := lg.fmt_level_for_term(lv)
 	println('$timestamp $level $target: $msg')
 }

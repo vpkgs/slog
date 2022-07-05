@@ -67,7 +67,7 @@ pub interface Logger {
 
 pub struct BaseLogger {}
 
-pub fn (lg &BaseLogger) fmt_level(lv Level) string {
+pub fn (lg &BaseLogger) fmt_level_for_term(lv Level) string {
 	return match lv {
 		.disabled { empty_str }
 		.error { term.red('ERROR') }
@@ -78,7 +78,7 @@ pub fn (lg &BaseLogger) fmt_level(lv Level) string {
 	}
 }
 
-pub fn (lg &BaseLogger) fmt_level_for_file(lv Level) string {
+pub fn (lg &BaseLogger) fmt_level(lv Level) string {
 	return match lv {
 		.disabled { empty_str }
 		.error { 'ERROR' }
