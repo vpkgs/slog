@@ -34,7 +34,7 @@ pub fn (lg &DefaultLoggger) log(lv Level, target string, msg string) {
 	lg.log_console(lv, target, msg)
 }
 
-fn (lg DefaultLoggger) log_file(lv Level, target string, msg string) {
+fn (lg &DefaultLoggger) log_file(lv Level, target string, msg string) {
 	mut l := unsafe { lg }
 
 	timestamp := time.now().format_ss_micro()
