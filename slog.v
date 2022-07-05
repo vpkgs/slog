@@ -7,8 +7,9 @@ const (
 )
 
 pub const (
-	__logger  = &Logger(voidptr(0))
-	max_level = Level.disabled
+	__logger    = &Logger(voidptr(0))
+	max_level   = Level.disabled
+	default_env = 'V_LOG'
 )
 
 pub enum Level {
@@ -18,6 +19,22 @@ pub enum Level {
 	info
 	debug
 	trace
+}
+fn level___from_str(lv_str string) Level {
+	match lv_str {
+		'error' { return .error }
+		'warn' { return .warn }
+		'info' { return .info }
+		'debug' { return .debug }
+		'trace' { return .trace }
+		else {
+			$if !prod {
+				dump('invalid level: $lv_str')
+				panic('Invalid level result in `.disabled` in production (-prod)')
+			}
+			return .disabled
+		}
+	}
 }
 
 pub fn set_max_level(level Level) {
@@ -31,6 +48,11 @@ pub fn set_max_level(level Level) {
 
 [inline]
 pub fn get_logger() &Logger {
+	$if !prod {
+		if isnil(__logger) {
+			panic('logger is nil in production (-prod)')
+		}
+	}
 	return __logger
 }
 
@@ -42,27 +64,20 @@ pub fn set_logger(log &Logger) {
 	}
 }
 
-pub fn log_enabled(target string, lv Level) bool {
-	return true
-}
-
 pub fn log(lv Level, target string, msg string) {
-	if int(lv) <= int(max_level) {
-		// if logger_ := get_logger() {
-		logger_ := get_logger()
-		if log_enabled(target, lv) {
-			logger_.log(lv, target, msg)
-		}
-		// } else {
-		// 	$if dbg_logger ? {
-		// 		eprintln('${@FILE}:${@LINE}:${@COLUMN} ${@METHOD}: logger not set')
-		// 	}
-		// }
+	if max_level == .disabled {
+		return
 	}
+
+	logger_ := get_logger()
+	// if logger_.enabled(target, lv) { // FIXME: This result in segfault... 
+		logger_.log(lv, target, msg)
+	// }
 }
 
 pub interface Logger {
 	log(lv Level, target string, msg string)
+	// enabled(target string, lv Level) bool
 }
 
 pub struct BaseLogger {}

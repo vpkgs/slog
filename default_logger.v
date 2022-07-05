@@ -5,6 +5,7 @@ import time
 
 pub struct DefaultLoggger {
 	BaseLogger
+	ModLevelMapString
 	ofname_prefix string
 mut:
 	ofname string
@@ -17,7 +18,7 @@ pub:
 	level Level = Level.info
 }
 
-pub fn init_with_default_logger(ofname string, opt DefaultLogggerOpt) {
+pub fn init_with_default_logger(ofname string, opt DefaultLogggerOpt) &DefaultLoggger {
 	name := '$ofname-0.log'
 	ofile := os.open_append(name) or { panic('couldn\'t opening log file $name for appending') }
 	mut log := &DefaultLoggger{
@@ -27,11 +28,14 @@ pub fn init_with_default_logger(ofname string, opt DefaultLogggerOpt) {
 	}
 	set_logger(log)
 	set_max_level(opt.level)
+	return log
 }
 
 pub fn (lg &DefaultLoggger) log(lv Level, target string, msg string) {
-	lg.log_file(lv, target, msg)
-	lg.log_console(lv, target, msg)
+	if lg.enabled(target, lv) { // TODO: move inside `slog.log()` (segfault...)
+		lg.log_file(lv, target, msg)
+		lg.log_console(lv, target, msg)
+	}
 }
 
 fn (lg &DefaultLoggger) log_file(lv Level, target string, msg string) {
