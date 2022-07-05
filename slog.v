@@ -7,7 +7,7 @@ const (
 )
 
 pub const (
-	__logger  = Logger(voidptr(0))
+	__logger  = &Logger(voidptr(0))
 	max_level = Level.disabled
 )
 
@@ -30,7 +30,7 @@ pub fn set_max_level(level Level) {
 }
 
 [inline]
-pub fn get_logger() Logger {
+pub fn get_logger() &Logger {
 	return __logger
 }
 
