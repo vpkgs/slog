@@ -1,9 +1,10 @@
 # Binaries for programs and plugins
 main
-tracing
+slog
 *.exe
 *.exe~
 *.so
 *.dylib
 *.dll
+*.log
 vls.log

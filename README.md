@@ -21,7 +21,7 @@ import os
 
 fn main() {
 	ofilename := os.real_path(os.join_path(os.dir(@FILE), 'logfile'))
-	slog.init_with_default_logger(ofilename, level: .info)
+	slog.init_with_default_logger(ofilename)
 
 	slog.err(@MOD, 'Warning here')
 	slog.warn(@MOD, 'Warning here')
@@ -56,7 +56,10 @@ fn trace(msg string) {
 
 fn main() {
 	ofilename := os.real_path(os.join_path(os.dir(@FILE), 'logfile'))
-	slog.init_with_default_logger(ofilename, level: .info)
+	mut logger := slog.init_with_default_logger(ofilename)
+	// slog.set_max_level(.info)
+	logger.set_level_from_default_env() // value of "V_LOG" is used
+	logger.set_level_from_envvar("YOUR_ENVVAR") // value of "YOUR_ENVVAR" is used
 
 	err('Warning here')
 	warn('Warning here')
@@ -90,7 +93,8 @@ fn trace(tag string, msg string) {
 
 // then use
 fname := os.real_path(os.join_path(os.dir(@FILE), 'logfile'))
-slog.init_with_default_logger(fname, level: .trace) // should be called only once
+slog.init_with_default_logger(fname) // should be called only once
+slog.set_max_level(.trace)
 //
 error(@FILE, 'error')
 warn(@FILE, 'warn')
@@ -172,6 +176,31 @@ pub fn (lg &CustomLoggger) collect() {
 		}
 	}
 }
+```
+
+
+### Environment Variable
+
+Using envvar, we can avoid hard coding log level.
+
+#### How to use
+The following code
+
+```v
+// set 'trace,net.websocket=warn,mylib=trace' as value of `V_LOG`. It's not need to be hardcoded. set at terminal instead...
+os.setenv(slog.default_env, 'trace,net.websocket=warn,mylib=trace', false) // `slog.default_env` => 'V_LOG'
+mut logger := init_with_default_logger('myfile')
+logger.set_level_from_default_env()
+// logger.set_level_from_envvar("YOUR_ENVVAR") // if you prefer to use other envvar
+```
+
+is equivalent to
+
+```v
+mut logger := init_with_default_logger('myfile')
+set_max_level(.trace)
+logger.lv_map['net.websocket'] = .warn
+logger.lv_map['mylib'] = .trace
 ```
 
 ## Motivation
