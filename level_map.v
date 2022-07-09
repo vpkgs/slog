@@ -7,11 +7,30 @@ pub mut:
 	lv_map map[string]Level
 }
 
+// See `ModLevelMapString#set_level_from_str`
 pub fn (mut lg ModLevelMapString) set_level_from_default_env() {
 	val := os.getenv(default_env)
 	lg.set_level_from_str(val)
 }
 
+// See `ModLevelMapString#set_level_from_str`
+pub fn (mut lg ModLevelMapString) set_level_from_envvar(name string) {
+	val := os.getenv(name)
+	$if slog_envcheck ? {
+		if val.len == 0 {
+			panic("[WARN] envvar $name, is not set!!")
+		}
+	}
+	lg.set_level_from_str(val)
+}
+
+// ```v
+// lg.set_level_from_str('info,net.websocket=debug,mylib=info')
+// // is equivalent to
+// set_max_level(.info)
+// lg.lv_map['net.websocket'] = .debug
+// lg.lv_map['mylib'] = .info
+// ```
 [inline]
 pub fn (mut lg ModLevelMapString) set_level_from_str(val string) {
 	if val.len > 0 {

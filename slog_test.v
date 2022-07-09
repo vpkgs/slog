@@ -13,6 +13,7 @@ fn test_dev() {
 	{
 		mut logger := init_with_default_logger('myfile')
 		logger.set_level_from_default_env()
+		logger.set_level_from_envvar("NON_EXISTING_ENVVAR")
 	}
 	dump(max_level)
 	log(.error, @MOD, 'test')
