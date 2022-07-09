@@ -2,7 +2,7 @@
 
 ## v3.0.0
 
-https://github.com/vpkgs/slog/compare/v2.0.0..v3.0.0#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5
+- Full diff https://github.com/vpkgs/slog/compare/v2.0.0..v3.0.0
 
 ### 🎉 New features
 - read logger level configuration from environment variables
@@ -11,11 +11,11 @@ https://github.com/vpkgs/slog/compare/v2.0.0..v3.0.0#diff-b335630551682c19a781af
 
 ### 🛠 Breaking changes
 - `max_level` and `enabled?` check is, now, responsibility of logger implementation.
-
+- public method name of `BaseLogger` changed
 
 ## v2.0.0
 
-https://github.com/vpkgs/slog/compare/v1.0.0..v2.0.0#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5
+- Full diff https://github.com/vpkgs/slog/compare/v1.0.0..v2.0.0
 
 ### 🛠 Breaking changes
 - simple fn (`err`, `warn` ...) now requires `target` as 1st arg
