@@ -36,11 +36,13 @@ pub fn (lg &TargetedLogger) trace(s string) {
 	__logger.log(.trace, lg.target, s)
 }
 
-// Implements interface log.Logger
+// Implements interface vlibs [`log.Logger`](https://modules.vlang.io/log.html#Logger).
 pub struct TargetedVLogger {
 	target string [required]
 }
 
+// Returns logger implements [`log.Logger`](https://modules.vlang.io/log.html#Logger).
+// 
 // ```v
 // vlogger := slog.get_v_logger('net.websocket')
 // websocket.new_client(url, logger: &vlogger)
