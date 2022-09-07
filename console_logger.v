@@ -1,6 +1,5 @@
 module slog
 
-import os
 import time
 
 pub struct ConsoleLogger {
