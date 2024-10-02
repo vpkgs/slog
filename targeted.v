@@ -2,7 +2,7 @@ module slog
 
 // Easy usage
 pub struct TargetedLogger {
-	target string [required]
+	target string @[required]
 }
 
 // ```v

@@ -18,7 +18,7 @@ pub fn (mut lg ModLevelMapString) set_level_from_envvar(name string) {
 	val := os.getenv(name)
 	$if slog_envcheck ? {
 		if val.len == 0 {
-			panic("[WARN] envvar $name, is not set!!")
+			panic('[WARN] envvar ${name}, is not set!!')
 		}
 	}
 	lg.set_level_from_str(val)
@@ -31,7 +31,7 @@ pub fn (mut lg ModLevelMapString) set_level_from_envvar(name string) {
 // lg.lv_map['net.websocket'] = .debug
 // lg.lv_map['mylib'] = .info
 // ```
-[inline]
+@[inline]
 pub fn (mut lg ModLevelMapString) set_level_from_str(val string) {
 	if val.len > 0 {
 		for setting in val.split(',').map(it.trim_space()) {

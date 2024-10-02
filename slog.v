@@ -2,15 +2,11 @@ module slog
 
 import term
 
-const (
-	empty_str = ''
-)
+const empty_str = ''
 
-pub const (
-	__logger    = &Logger(voidptr(0))
-	max_level   = Level.disabled
-	default_env = 'V_LOG'
-)
+pub const __logger = &Logger(unsafe { nil })
+pub const default_env = 'V_LOG'
+pub const max_level = Level.disabled
 
 pub enum Level {
 	disabled
@@ -40,7 +36,7 @@ fn level___from_str(lv_str string) Level {
 		}
 		else {
 			$if !prod {
-				dump('invalid level: $lv_str')
+				dump('invalid level: ${lv_str}')
 				panic('Invalid level result in `.disabled` in production (-prod)')
 			}
 			return .disabled
