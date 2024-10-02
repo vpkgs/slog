@@ -27,7 +27,7 @@ pub fn init_with_default_logger(ofname string, opt DefaultLoggerOpt) &DefaultLog
 		ofile:         ofile
 	}
 	set_logger(log)
-	set_max_level(opt.level)
+	// set_max_level(opt.level)
 	return log
 }
 

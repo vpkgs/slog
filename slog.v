@@ -44,14 +44,14 @@ fn level___from_str(lv_str string) Level {
 	}
 }
 
-pub fn set_max_level(level Level) {
-	unsafe {
-		max_level = level
-	}
-	$if dbg_logger ? {
-		dump(max_level)
-	}
-}
+// pub fn set_max_level(level Level) {
+// 	unsafe {
+// 		max_level = level
+// 	}
+// 	$if dbg_logger ? {
+// 		dump(max_level)
+// 	}
+// }
 
 [inline]
 pub fn get_logger() &Logger {

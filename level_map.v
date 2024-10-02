@@ -38,7 +38,7 @@ pub fn (mut lg ModLevelMapString) set_level_from_str(val string) {
 			if idx := setting.index('=') {
 				lg.lv_map[setting[..idx]] = level___from_str(setting[idx + 1..])
 			} else {
-				set_max_level(level___from_str(setting))
+				// set_max_level(level___from_str(setting))
 			}
 		}
 	}

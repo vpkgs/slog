@@ -10,7 +10,7 @@ pub struct ConsoleLogger {
 pub fn init_with_console_logger(opt DefaultLoggerOpt) &ConsoleLogger {
 	mut log := &ConsoleLogger{}
 	set_logger(log)
-	set_max_level(opt.level)
+	// set_max_level(opt.level)
 	return log
 }
 
